@@ -16,17 +16,21 @@ public class MyConsole {
         System.out.println(ConsoleColors.GREEN + "3." + ConsoleColors.RESET + " Scissors");
         System.out.print("Choose your option: ");
 
-        int answer = 0;
+        int answer;
         do {
             while (!sc.hasNextInt()) {
                 System.err.print("Please enter a valid number: ");
                 sc.next();
             }
-            System.err.print("Number must be between 1 and 3: ");
+
             answer = sc.nextInt();
-            sc.nextLine();
+
+            if (answer < 1 || answer > 3)
+                System.err.print("Number must be between 1 and 3: ");
+
         } while (answer < 1 || answer > 3);
 
+        sc.nextLine();
         System.out.println();
 
         return answer;
