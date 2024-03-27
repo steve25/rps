@@ -55,6 +55,7 @@ public class MyConsole {
 
         System.out.println();
         System.out.println("You " + ConsoleColors.YELLOW_BOLD + playerScore + " : " + computerScore + ConsoleColors.RESET + " Computer");
+        System.out.println("___________________________");
         System.out.println();
     }
 
