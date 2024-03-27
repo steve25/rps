@@ -3,9 +3,6 @@ import things.Rock;
 import things.Scissors;
 import things.Things;
 
-
-import java.io.File;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
