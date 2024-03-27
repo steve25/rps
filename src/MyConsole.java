@@ -19,10 +19,10 @@ public class MyConsole {
         int answer = 0;
         do {
             while (!sc.hasNextInt()) {
-                System.err.print("Please enter a number between 1 and 3: ");
+                System.err.print("Please enter a valid number: ");
                 sc.next();
             }
-
+            System.err.print("Number must be between 1 and 3: ");
             answer = sc.nextInt();
             sc.nextLine();
         } while (answer < 1 || answer > 3);
