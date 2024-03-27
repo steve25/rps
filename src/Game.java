@@ -49,30 +49,39 @@ public class Game {
             char winner = whoWin(myAnswer, oponentAnswer);
 
             MyConsole.printResult(winner, playerScore, computerScore);
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+
+            makeStuffs(winner);
+
         }
-        MyConsole.printFinalResult(playerScore == 5 ? 'p' : 'c');
+        MyConsole.printFinalResult(playerScore == 5 ? 'p' : 'c', playerScore, computerScore);
 
     }
 
-    private char whoWin(Things myAnswer, Things oponentAnswer) {
+    private void makeStuffs(char winner) {
         SoundPlayer player = new SoundPlayer();
 
+        switch (winner) {
+            case 'p':
+                player.playWin();
+                break;
+            case 'c':
+                player.playLoose();
+                break;
+            default:
+                player.playDraw();
+                break;
+        }
+    }
+
+    private char whoWin(Things myAnswer, Things oponentAnswer) {
         if (myAnswer.beat(oponentAnswer)) {
-            player.playWin();
             playerScore++;
             return 'p';
         } else if (oponentAnswer.beat(myAnswer)) {
-            player.playLoose();
             computerScore++;
             return 'c';
         }
 
-        player.playDraw();
         return 'd';
     }
 
@@ -80,4 +89,11 @@ public class Game {
         return things.get(1 + (int) (Math.random() * 3));
     }
 
+    public int getPlayerScore() {
+        return playerScore;
+    }
+
+    public int getComputerScore() {
+        return computerScore;
+    }
 }

@@ -25,8 +25,8 @@ public class SoundPlayer {
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
-
-        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+            Thread.sleep(clip.getMicrosecondLength() / 1000);
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
 

@@ -40,10 +40,10 @@ public class MyConsole {
         System.out.println();
         switch (winner) {
             case 'p':
-                System.out.println(ConsoleColors.GREEN + "You win!" + ConsoleColors.RESET);
+                System.out.println(ConsoleColors.GREEN + "You win this round!" + ConsoleColors.RESET);
                 break;
             case 'c':
-                System.out.println(ConsoleColors.RED + "You lose!" + ConsoleColors.RESET);
+                System.out.println(ConsoleColors.RED + "You lose this round!" + ConsoleColors.RESET);
                 break;
             case 'd':
                 System.out.println(ConsoleColors.YELLOW + "It's a tie!" + ConsoleColors.RESET);
@@ -58,7 +58,9 @@ public class MyConsole {
         System.out.println();
     }
 
-    public static void printFinalResult(char winner) {
+    public static void printFinalResult(char winner, int playerScore, int computerScore) {
+        System.out.println("Final Result is: ");
+        System.out.println("You " + ConsoleColors.YELLOW_BOLD + playerScore + " : " + computerScore + ConsoleColors.RESET + " Computer");
         System.out.println(winner == 'p'
                 ? "You " + ConsoleColors.GREEN + "WIN" + ConsoleColors.RESET + " this game!"
                 : "You " + ConsoleColors.RED + "LOSE" + ConsoleColors.RESET + " this game!"
