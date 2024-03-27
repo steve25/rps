@@ -5,6 +5,7 @@ import things.Things;
 
 
 import java.io.File;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,22 +63,19 @@ public class Game {
     }
 
     private char whoWin(Things myAnswer, Things oponentAnswer) {
-
-        File winFile = new File("src/sounds/winner.wav");
-        File looseFile = new File("src/sounds/loose.wav");
-        File drawFile = new File("src/sounds/draw.wav");
+        SoundPlayer player = new SoundPlayer();
 
         if (myAnswer.beat(oponentAnswer)) {
-            SoundPlayer.play(winFile);
+            player.playWin();
             playerScore++;
             return 'p';
         } else if (oponentAnswer.beat(myAnswer)) {
-            SoundPlayer.play(looseFile);
+            player.playLoose();
             computerScore++;
             return 'c';
         }
 
-        SoundPlayer.play(drawFile);
+        player.playDraw();
         return 'd';
     }
 
