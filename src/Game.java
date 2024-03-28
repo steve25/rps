@@ -39,7 +39,7 @@ public class Game {
 
     public void round() {
 
-        while (playerScore < 5 && computerScore < 5) {
+        while (Math.abs(playerScore - computerScore) != 2) {
             Things myAnswer = things.get(MyConsole.choose());
             System.out.println("Your choice is " + ConsoleColors.YELLOW + myAnswer + ConsoleColors.RESET);
 
@@ -53,7 +53,8 @@ public class Game {
             makeStuffs(winner);
 
         }
-        MyConsole.printFinalResult(playerScore == 5 ? 'p' : 'c', playerScore, computerScore);
+        char finalWinner = playerScore > computerScore? 'p' : 'c';
+        MyConsole.printFinalResult(finalWinner, playerScore, computerScore);
 
     }
 
