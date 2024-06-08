@@ -1,7 +1,14 @@
+package sk.pocsik.utils;
+
+
 import java.util.Scanner;
 
 public class MyConsole {
     public static Scanner sc = new Scanner(System.in);
+
+    public static void setScanner(Scanner scanner) {
+        sc = scanner;
+    }
 
     public static boolean getPlaying() {
         System.out.print("You want to play a game? " + ConsoleColors.GREEN + "(y/n): " + ConsoleColors.RESET);
@@ -11,7 +18,7 @@ public class MyConsole {
     }
 
     public static int choose() {
-        System.out.println(ConsoleColors.GREEN + "1." + ConsoleColors.RESET + " Rock ");
+        System.out.println(ConsoleColors.GREEN + "1." + ConsoleColors.RESET + " Rock");
         System.out.println(ConsoleColors.GREEN + "2." + ConsoleColors.RESET + " Paper");
         System.out.println(ConsoleColors.GREEN + "3." + ConsoleColors.RESET + " Scissors");
         System.out.print("Choose your option: ");

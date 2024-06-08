@@ -1,30 +1,43 @@
-import things.Paper;
-import things.Rock;
-import things.Scissors;
-import things.Things;
+package sk.pocsik;
+
+import sk.pocsik.things.Paper;
+import sk.pocsik.things.Rock;
+import sk.pocsik.things.Scissors;
+import sk.pocsik.things.Things;
+import sk.pocsik.utils.ConsoleColors;
+import sk.pocsik.utils.MyConsole;
+import sk.pocsik.utils.SoundPlayer;
 
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class Game {
-    private Map<Integer, Things> things = new HashMap<>() {{
-        put(1, new Rock());
-        put(2, new Paper());
-        put(3, new Scissors());
-    }};
-
     private int playerScore;
     private int computerScore;
-
+    private final Map<Integer, Things> things;
 
     public Game() {
-        this.playerScore = 0;
-        this.computerScore = 0;
-        gameLoop();
+        this.things = new HashMap<>() {{
+            put(1, new Rock());
+            put(2, new Paper());
+            put(3, new Scissors());
+        }};
     }
 
-    public void gameLoop() {
+    public int getPlayerScore() {
+        return playerScore;
+    }
+
+    public int getComputerScore() {
+        return computerScore;
+    }
+
+    public Map<Integer, Things> getThings() {
+        return things;
+    }
+
+    public void startGame() {
         while (true) {
             boolean isPlaying = MyConsole.getPlaying();
 
@@ -37,16 +50,16 @@ public class Game {
         }
     }
 
-    public void round() {
+    private void round() {
 
         while (Math.abs(playerScore - computerScore) != 2) {
             Things myAnswer = things.get(MyConsole.choose());
             System.out.println("Your choice is " + ConsoleColors.YELLOW + myAnswer + ConsoleColors.RESET);
 
-            Things oponentAnswer = computerChoice();
-            System.out.println("Computers choice is " + ConsoleColors.YELLOW + oponentAnswer + ConsoleColors.RESET);
+            Things opponentAnswer = computerChoice();
+            System.out.println("Computers choice is " + ConsoleColors.YELLOW + opponentAnswer + ConsoleColors.RESET);
 
-            char winner = whoWin(myAnswer, oponentAnswer);
+            char winner = whoWin(myAnswer, opponentAnswer);
 
             MyConsole.printResult(winner, playerScore, computerScore);
 
@@ -59,26 +72,28 @@ public class Game {
     }
 
     private void makeStuffs(char winner) {
-        SoundPlayer player = new SoundPlayer();
+        SoundPlayer soundPlayer = new SoundPlayer();
 
         switch (winner) {
             case 'p':
-                player.playWin();
+                soundPlayer.playWin();
                 break;
             case 'c':
-                player.playLoose();
+                soundPlayer.playLoose();
                 break;
             default:
-                player.playDraw();
+                soundPlayer.playDraw();
                 break;
         }
     }
 
-    private char whoWin(Things myAnswer, Things oponentAnswer) {
-        if (myAnswer.beat(oponentAnswer)) {
+    private char whoWin(Things myAnswer, Things opponentAnswer) {
+        if (myAnswer.beat(opponentAnswer)) {
             playerScore++;
             return 'p';
-        } else if (oponentAnswer.beat(myAnswer)) {
+        }
+
+        if (opponentAnswer.beat(myAnswer)) {
             computerScore++;
             return 'c';
         }
@@ -88,13 +103,5 @@ public class Game {
 
     private Things computerChoice() {
         return things.get(1 + (int) (Math.random() * 3));
-    }
-
-    public int getPlayerScore() {
-        return playerScore;
-    }
-
-    public int getComputerScore() {
-        return computerScore;
     }
 }
